@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details</title>
+    <!-- Include Bootstrap for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Include custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Assuming 'product' is a dictionary with the necessary keys -->
+            <div class="col-md-6">
+                <!-- Product Image -->
+                {% if product.image_path %}
+                <img src="{{ url_for('static', filename='images/' + product.image_path) }}" class="img-fluid" alt="{{ product.name }}">
+                {% else %}
+                <p>No image available.</p>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <!-- Product Information -->
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                 <!-- Update as per your schema -->
+                <p>Price: ${{ product.price }}</p>
+                <!-- Command button -->
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

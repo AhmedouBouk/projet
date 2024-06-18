@@ -1,0 +1,26 @@
+<!-- add_command.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Command</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <form action="/add-command" method="post" class="form-group">
+        <input type="hidden" id="product_name" name="product_name" value="{{ request.args.get('product_name', '') }}" required>
+        <div class="mb-3">
+            <a href="/select-product" class="btn btn-primary">Select Product</a>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number:</label>
+            <input type="text" id="phone" name="phone" class="form-control" required placeholder="e.g., +1234567890">
+        </div>
+        <input type="submit" value="Add Command" class="btn btn-success">
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

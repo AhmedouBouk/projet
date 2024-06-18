@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light grey background */
+        }
+        .container {
+            max-width: 600px; /* Sets the maximum width of the form container */
+            margin-top: 50px; /* Adds a margin to the top of the container */
+            background-color: #fff; /* White background for the form area */
+            padding: 30px; /* Padding inside the container */
+            border-radius: 8px; /* Rounded corners for the container */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* A subtle shadow for the container */
+        }
+        h2 {
+            text-align: center; /* Centers the heading */
+            margin-bottom: 20px; /* Adds space below the heading */
+        }
+        .btn {
+            background-color: #007bff; /* Blue background for the submit button */
+            color: white; /* White text for the button */
+            border: none; /* Removes the border from the button */
+            padding: 10px 20px; /* Padding inside the button */
+            margin-top: 20px; /* Margin above the button */
+            width: 100%; /* Makes the button extend full container width */
+        }
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue background on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add Product</h2>
+        <form method="post" action="{{ url_for('add_product') }}" enctype="multipart/form-data" id="productForm">
+            <div class="form-group">
+                <label for="name">Product Name:</label>
+                <input type="text" class="form-control" name="name" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" step="0.01" name="price" id="price" required>
+            </div>
+            <div class="form-group">
+                <label for="category_id">Category:</label>
+                <select class="form-control" name="category_id" id="category_id" required>
+                    <!-- Options will be filled in by JavaScript -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" name="description" id="description" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">Product Image:</label>
+                <input type="file" class="form-control-file" name="image" id="image" required>
+            </div>
+            <button type="submit" class="btn">Add Product</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('{{ url_for("get_categories") }}')
+                .then(response => response.json())
+                .then(data => {
+                    const categorySelect = document.getElementById('category_id');
+                    data.forEach(category => {
+                        let option = new Option(category.name, category.id);
+                        categorySelect.add(option);
+                    });
+                })
+                .catch(error => console.error('Error loading categories:', error));
+        });
+    </script>
+</body>
+</html>
